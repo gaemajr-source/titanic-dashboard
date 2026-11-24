@@ -1,4 +1,3 @@
-%%writefile app.py
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -51,8 +50,8 @@ if len(f) == 0:
     st.warning("조건에 맞는 승객이 없습니다.")
     st.stop()
 
-# 화면을 탭 3개(개요, 관계, 이상치)로 나누기[cite: 51]
-tab1, tab2, tab3 = st.tabs(["개요", "관계", "이상치"])[cite: 51]
+# 화면을 탭 3개(개요, 관계, 이상치)로 나누기
+tab1, tab2, tab3 = st.tabs(["개요", "관계", "이상치"])
 
 with tab1:
     st.subheader("대시보드 개요 및 주요 지표")
@@ -70,13 +69,13 @@ with tab1:
         st.dataframe(f)
 
 with tab2:
-    st.subheader("변수 간 상관관계 분석")[cite: 51]
+    st.subheader("변수 간 상관관계 분석")
     corr = f.select_dtypes(include=["number"]).corr()
-    fig_corr = px.imshow(corr, text_auto=True, title="수치형 변수 상관 히트맵")[cite: 51]
-    st.plotly_chart(fig_corr, use_container_width=True)[cite: 51]
+    fig_corr = px.imshow(corr, text_auto=True, title="수치형 변수 상관 히트맵")
+    st.plotly_chart(fig_corr, use_container_width=True)
 
 with tab3:
-    st.subheader("주요 수치형 열 이상치(Outlier) 확인")[cite: 51]
-    target_col = st.selectbox("이상치 확인할 열 선택", ["age", "fare"], key="outlier_col")[cite: 51]
-    fig_box = px.box(f, y=target_col, title=f"{target_col} 이상치 박스플롯")[cite: 51]
-    st.plotly_chart(fig_box, use_container_width=True)[cite: 51]
+    st.subheader("주요 수치형 열 이상치(Outlier) 확인")
+    target_col = st.selectbox("이상치 확인할 열 선택", ["age", "fare"], key="outlier_col")
+    fig_box = px.box(f, y=target_col, title=f"{target_col} 이상치 박스플롯")
+    st.plotly_chart(fig_box, use_container_width=True)
